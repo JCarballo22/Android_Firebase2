@@ -1,10 +1,12 @@
 package com.example.android_firebase2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +26,15 @@ class MainActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btn_Login)
         btnGoogle = findViewById(R.id.btn_Google)
 
+        ejecutarAnalitica()
         setup()
+    }
+
+    fun ejecutarAnalitica(){
+        val analicis = FirebaseAnalytics.getInstance(this)
+        val bundle = Bundle()
+        bundle.putString("mensaje","Integración de firebase completa")
+        analicis.logEvent("InitScreen",bundle)
     }
 
     fun setup(){
@@ -37,10 +47,24 @@ class MainActivity : AppCompatActivity() {
                         etPass.text.toString()
                     ).addOnCompleteListener{
                         if(it.isSuccessful){
-
+                            mostrarPrincipal(it.result?.user?.email?:"",TipoProveedor.BASICO)
                         }else{
                             mostrarAlerta()
                         }
+                    }
+            }
+        }
+        btnLogin.setOnClickListener {
+            if (etEmail.text.isNotEmpty() && etPass.text.isNotEmpty()){
+                FirebaseAuth.getInstance()
+                    .signInWithEmailAndPassword(
+                        etEmail.text.toString(),
+                        etPass.text.toString()).addOnCompleteListener {
+                            if(it.isSuccessful){
+                                mostrarPrincipal(it.result?.user?.email?:"",TipoProveedor.BASICO)
+                            }else{
+                                mostrarAlerta()
+                            }
                     }
             }
         }
@@ -54,4 +78,18 @@ class MainActivity : AppCompatActivity() {
         val dialog:AlertDialog = builder.create()
         dialog.show()
     }
+
+    fun mostrarPrincipal(email:String,proveedor:TipoProveedor){
+        val ventana: Intent = Intent(this,PrincipalActivity::class.java).apply {
+            putExtra("email",email)
+            putExtra("proveedor",proveedor.name.toString())
+        }
+        startActivity(ventana)
+
+    }
+
+}
+
+enum class TipoProveedor{
+    BASICO
 }
