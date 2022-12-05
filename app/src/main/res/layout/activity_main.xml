@@ -8,6 +8,7 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_autenticar"
         android:layout_width="363dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"

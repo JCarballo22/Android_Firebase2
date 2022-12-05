@@ -33,6 +33,38 @@
                 android:inputType="text"
                 android:textSize="24dp"/>
 
+            <EditText
+                android:id="@+id/et_Telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ingresa un telefono"
+                android:ems="10"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/et_Municipio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa tu municipio"
+                android:ems="10"
+                android:inputType="textPersonName"
+                />
+            <Button
+                android:id="@+id/btn_Guardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar" />
+            <Button
+            android:id="@+id/btn_Consultar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Consultar" />
+
+            <Button
+                android:id="@+id/btn_Borrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Borrar" />
             <Button
                 android:id="@+id/btn_Cerrar"
                 android:layout_width="match_parent"

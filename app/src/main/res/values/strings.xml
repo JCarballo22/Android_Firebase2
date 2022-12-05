@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android_Firebase2</string>
+    <string name="prefs_file">com.example.android_firebase2.PREFERECE_FILE_KEY</string>
 </resources>
